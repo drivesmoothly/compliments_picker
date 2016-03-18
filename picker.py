@@ -6,6 +6,7 @@ import configparser
 import re
 from random import randint
 import collections
+from datetime import datetime
 
 config = configparser.ConfigParser()
 config.read("team.ini")
@@ -16,6 +17,9 @@ picks_count = int(config['default']['picks-count'])
 random_retries = 3
 
 def print_result(pool, picks):
+    current_datetime = datetime.now()
+    message = current_datetime.strftime('%Y-%m-%d %H:%M') + '\n'
+    print message
     results = []
     for by in range(0, team_size):
         reviewer = [team[by]]
@@ -38,10 +42,11 @@ def print_result(pool, picks):
     else:
         print 'emailing...'
         email_results(results)
-    
+
 def email_results(results):
+    current_datetime = datetime.datetime.now()
     for review in results:
-        msg = ""
+        msg = current_datetime.strftime('%Y-%m-%d %H:%M') + "\n\n"
         msg += "Hi, " + review[0] + ', please review the following(s): \r\n'
         for i in range(1, len(review)):
             msg += review[i]
