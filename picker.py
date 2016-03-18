@@ -44,7 +44,7 @@ def print_result(pool, picks):
         email_results(results)
 
 def email_results(results):
-    current_datetime = datetime.datetime.now()
+    current_datetime = datetime.now()
     for review in results:
         msg = current_datetime.strftime('%Y-%m-%d %H:%M') + "\n\n"
         msg += "Hi, " + review[0] + ', please review the following(s): \r\n'
